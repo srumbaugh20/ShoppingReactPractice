@@ -1,42 +1,55 @@
 import React, { Component } from 'react';
-import List from './list';
+import List from "./list"
 import Cart from './cart';
 import './App.css';
 
-const products = ['ball', 'shovel', 'pineapple']
+const api = "http://localhost:56523/products/"
 
 class App extends Component {
   constructor(){
     super();
-    this.state = { products:[] };
+    this.state = { cart:[],
+                  products: []};
     this.addToCart = this.addToCart.bind(this);
     this.emptyCart = this.emptyCart.bind(this);
   }
 
+componentDidMount() {
+  fetch(api).then((response)=>{
+    if(response.ok){
+      response.json().then(data =>{
+        this.setState({
+          products: data
+        })
+      })
+    }
+  })
+}
+
   addToCart(p) {
     this.setState((oldState) => {
       return {
-        products: oldState.products.concat(" " + p)
+        cart: oldState.cart.concat(p)
       }
     });
   }
 
   emptyCart(){
-    this.setState(() => {
-      return {
-        products: []
-      }
+    this.setState({
+        cart: []
     })
   }
 
   render() {
     return (
       <div className="App">
-        {this.state.products}
-      <Cart count={this.state.products.length}/>
+        {this.state.cart.map((p)=>{
+          return p.name;
+        })}
+      <Cart count={this.state.cart.length}/>
       <br/>
       <button onClick={this.emptyCart}>Delete Cart</button>
-      <List products={products}  click={this.addToCart} />
+      <List products={this.state.products}  click={this.addToCart} />
       </div>
     );
   }

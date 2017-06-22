@@ -1,0 +1,12 @@
+{"products":[
+  {"id": 1,
+  "name": "Boot"},
+  {"id": 2,
+  "name": "Hippo"},
+  {"id": 3,
+  "name": "Cactus"},
+  {"id": 4,
+  "name": "Sponge"},
+  {"id": 5,
+  "name": "Hat"}
+  ]}

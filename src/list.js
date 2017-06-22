@@ -10,7 +10,7 @@ export default class List extends Component {
     return (
       <ul>
         {this.props.products.map((p)=>{
-          return <li key={p} onClick={()=>this.props.click(p)}>{p}</li>
+          return <li key={p.id} onClick={()=>this.props.click(p)}>{p.name}</li>
         })}
       </ul>
 
